@@ -23,3 +23,5 @@ Total ≈ `20 + 20 + 0 + 13.3 + 20 = 73.3 → 73%` → `███████░
 
 **Config (in `daily/config.json`)**  
 - `weights` per bucket, `leetcode_target`, `bar_len`, `filled_char`, `empty_char`, `timezone`, and `mode` (`merge`/`replace`/`multirow`).
+
+// merge or multirow
