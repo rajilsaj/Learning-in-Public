@@ -1,11 +1,10 @@
 This repository documents my journey of continuous learning, shared openly and transparently.
 
----
+
 
 
 > *“They are an intriguing people. From the moment they wake they devote themselves to the perfection of whatever they pursue. I have never seen such discipline.”* — Captain Nathan Algren (*The Last Samurai*)  
 
----
 
 ## To do
 
@@ -23,7 +22,7 @@ This repository documents my journey of continuous learning, shared openly and t
 
 > *"I am facing impostor syndrome. I don’t feel fully ready yet. With graduation coming in 2026, it’s already time to apply for Summer 2026 internships and prepare for my first job after graduation, but I want to try something different — maybe even a little crazy. I want to dedicate one full semester to sharpening myself, filling the gaps in my resume, and building real confidence in all the things I supposedly know. Like a samurai who spends his life sharpening his blade for the day of battle, I want to prepare with discipline and focus, so when my time comes, I will stand ready."*  -->
 
----
+
 
 
 ## Daily Log  
