@@ -30,4 +30,5 @@ This repository documents my journey of continuous learning, shared openly and t
 <!-- DAILY_TABLE_START -->
 | Day | Project | OSS | Concept | LeetCode | Reading | Daily Avg |
 |-----|---------|-----|---------|----------|---------|-----------|
+| 2025-09-02 | — | — | — | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](solutions/valid-anagram.md) <br> 3. [Best Time to Buy/Sell Stock](solutions/buy-sell-stock.md) </details> | [Deep Learning Book](https://deeplearningbook.org/) | ████████░░ 80% |
 <!-- DAILY_TABLE_END -->

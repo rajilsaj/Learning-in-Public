@@ -1,0 +1,13 @@
+{
+"date": "auto",
+"project": "—",
+"oss": "—",
+"concept": "—",
+"leetcode": [
+{ "title": "Two Sum", "link": "solutions/two-sum.md" },
+{ "title": "Valid Anagram", "link": "solutions/valid-anagram.md" },
+{ "title": "Best Time to Buy/Sell Stock", "link": "solutions/buy-sell-stock.md" }
+],
+"reading": "[Deep Learning Book](https://deeplearningbook.org/)",
+"percent": 80
+}
