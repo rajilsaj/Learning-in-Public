@@ -1,12 +1,11 @@
 <!-- Top banner (replace the path with your actual image) -->
 
-<br>
-
 <p align="center">
-  <img src="assets/kseniia-shepel-s.gif" alt="Learning in Public" width="820">
+  <em>If the banner doesn’t load, use this fallback:</em><br>
+  <a href="https://cdna.artstation.com/p/assets/images/images/055/747/992/original/kseniia-shepel-s.gif?1667661736">
+    Animated banner (ArtStation GIF)
+  </a>
 </p>
-
-<br>
 
 # Learning in Public
 
@@ -36,6 +35,7 @@ This repository documents my journey of continuous learning, shared openly and t
 <!-- DAILY_TABLE_START -->
 | Day | Project | OSS | Concept | LeetCode | Reading | Daily Avg |
 |-----|---------|-----|---------|----------|---------|-----------|
+| 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
 | 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
 <!-- DAILY_TABLE_END -->
 
