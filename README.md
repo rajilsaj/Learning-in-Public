@@ -1,10 +1,12 @@
 <!-- Top banner (replace the path with your actual image) -->
 
 <p align="center">
-  <img src="assets/rat.gif" alt="Learning in Public — rat banner" width="820">
+  <img src="assets/rat.gif" alt="Learning in Public — rat banner" width="200">
 </p>
 
 # Learning in Public
+
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](#)
 
 This repository documents my journey of continuous learning, shared openly and transparently.
 
@@ -33,20 +35,11 @@ This repository documents my journey of continuous learning, shared openly and t
 | Day | Project | OSS | Concept | LeetCode | Reading | Daily Avg |
 |-----|---------|-----|---------|----------|---------|-----------|
 | 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
-| 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
-| 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
 <!-- DAILY_TABLE_END -->
 
-## How this repo works
+# How this repo works
 
 [The average work completed calculator](help/how-this-repo-works.md)
 
----
 
-## Contributing
 
-Ditto.
-
-## License
-
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](#)
