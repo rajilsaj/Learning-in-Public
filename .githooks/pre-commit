@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+python3 scripts/update_daily_log.py
+git add README.md

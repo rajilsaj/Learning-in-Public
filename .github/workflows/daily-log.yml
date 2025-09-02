@@ -2,8 +2,14 @@ name: Auto-append daily log row
 
 on:
   schedule:
-    - cron: "5 13 * * *" # runs daily at ~09:05 America/New_York during EDT
-  workflow_dispatch: # allow manual run
+    - cron: "5 13 * * *" # daily at ~09:05 America/New_York during EDT
+  push:
+    paths:
+      - "daily/input.json"
+      - "daily/config.json"
+      - "scripts/update_daily_log.py"
+      - "README.md"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,11 +24,9 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Append today's row
-        env:
-          DAILY_PERCENT: "0" # change if you want a default non-zero
+      - name: Update Daily Log (auto-calc %)
         run: |
-          python3 append_daily_row.py
+          python3 scripts/update_daily_log.py
 
       - name: Commit changes (if any)
         run: |
@@ -30,6 +34,6 @@ jobs:
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add README.md
-            git commit -m "Auto-add daily row"
+            git commit -m "Auto-update Daily Log"
             git push
           fi
