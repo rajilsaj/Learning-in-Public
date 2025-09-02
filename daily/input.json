@@ -1,10 +1,11 @@
 {
 "date": "auto",
-"project": "Commit #48: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48)",
+"project": "Commit #49: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48)",
 "oss": "Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111)",
 "concept": "Consistent hashing → [notes](notes/consistent-hashing.md)",
 "leetcode": [
 { "title": "Two Sum", "link": "solutions/two-sum.md" },
+{ "title": "Valid Anagram", "link": "leetcode/valid-anagram.md" },
 { "title": "Valid Anagram", "link": "solutions/valid-anagram.md" }
 ],
 "reading": { "title": "[DDIA](https://dataintensive.net/)", "chapters_done": 1, "chapters_target": 1 }
