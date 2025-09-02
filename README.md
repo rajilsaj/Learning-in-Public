@@ -1,10 +1,7 @@
 <!-- Top banner (replace the path with your actual image) -->
 
 <p align="center">
-  <em>If the banner doesn’t load, use this fallback:</em><br>
-  <a href="https://cdna.artstation.com/p/assets/images/images/055/747/992/original/kseniia-shepel-s.gif?1667661736">
-    Animated banner (ArtStation GIF)
-  </a>
+  <img src="assets/rat.gif" alt="Learning in Public — rat banner" width="820">
 </p>
 
 # Learning in Public
@@ -37,6 +34,7 @@ This repository documents my journey of continuous learning, shared openly and t
 |-----|---------|-----|---------|----------|---------|-----------|
 | 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
 | 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
+| 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
 <!-- DAILY_TABLE_END -->
 
 ## How this repo works
@@ -47,10 +45,8 @@ This repository documents my journey of continuous learning, shared openly and t
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or pull request to propose improvements, fixes, or new ideas.
+Ditto.
 
 ## License
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](#)
-
-This project is licensed under the **Apache License 2.0** — a permissive license that allows anyone to **use, modify, and distribute** the code (including commercially) while providing a **patent grant** for added safety. See the full text in [`LICENSE`](LICENSE).
