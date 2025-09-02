@@ -14,7 +14,6 @@ This repository documents my journey of continuous learning, shared openly and t
 
 > “They are an intriguing people. From the moment they wake they devote themselves to the perfection of whatever they pursue. I have never seen such discipline.” — Captain Nathan Algren (The Last Samurai)
 
----
 
 ## Practice Plan
 
@@ -25,7 +24,7 @@ This repository documents my journey of continuous learning, shared openly and t
 5. Machine Learning — follow the [ML Engineer Roadmap](https://roadmap.sh/r/ml-engineer-3dqvu)  
 6. Reading — at least 1 chapter per day (programming/CS)
 
----
+
 
 ## Daily Log
 
@@ -35,13 +34,13 @@ This repository documents my journey of continuous learning, shared openly and t
 | 2025-09-02 | Commit #59: auth fix → [commit](https://github.com/rajil/bills-spender/commit/48) | Reviewed tests → [PR #111](https://github.com/someOSS/project/pull/111) | Consistent hashing → [notes](notes/consistent-hashing.md) | <details><summary>3 Problems</summary> 1. [Two Sum](solutions/two-sum.md) <br> 2. [Valid Anagram](leetcode/valid-anagram.md) <br> 3. [Valid Anagram](solutions/valid-anagram.md) </details> | [DDIA](https://dataintensive.net/) | ██████████ 100% |
 <!-- DAILY_TABLE_END -->
 
----
+
 
 ## How this repo works
 
 See: [The average work completed calculator](help/how-this-repo-works.md)
 
----
+
 
 ## License
 
