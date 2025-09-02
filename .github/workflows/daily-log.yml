@@ -2,29 +2,40 @@ name: Auto-append daily log row
 
 on:
   schedule:
-    - cron: "5 13 * * *" # daily at ~09:05 America/New_York during EDT
+    # GitHub cron runs in UTC.
+    # 13:05 UTC ≈ 09:05 America/New_York during DST.
+    # (Optionally add a second cron at 14:05 UTC for standard time.)
+    - cron: "5 13 * * *"
   push:
     paths:
       - "daily/input.json"
       - "daily/config.json"
       - "scripts/update_daily_log.py"
-      - "README.md"
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# Prevent overlapping runs on quick successive pushes
+concurrency:
+  group: daily-log-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update:
+    # Don't re-run on the bot's own "Auto-update Daily Log" push
+    if: github.event_name != 'push' || !contains(github.event.head_commit.message, 'Auto-update Daily Log')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # needed for pull --rebase
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Update Daily Log (auto-calc %)
+      - name: Update Daily Log (auto-calc %, merge mode via config)
         run: |
           python3 scripts/update_daily_log.py
 
@@ -33,6 +44,7 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git pull --rebase || true
             git add README.md
             git commit -m "Auto-update Daily Log"
             git push

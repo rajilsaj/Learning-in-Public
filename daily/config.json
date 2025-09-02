@@ -1,6 +1,9 @@
 {
+"mode": "merge",
 "weights": { "project": 20, "oss": 20, "concept": 20, "leetcode": 20, "reading": 20 },
 "leetcode_target": 3,
 "timezone": "America/New_York",
-"bar_len": 10
+"bar_len": 10,
+"filled_char": "█",
+"empty_char": "░"
 }
