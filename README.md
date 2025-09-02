@@ -1,15 +1,20 @@
-# Learning in Public
-
 This repository documents my journey of continuous learning, shared openly and transparently.
+
+---
+
+
+> *“They are an intriguing people. From the moment they wake they devote themselves to the perfection of whatever they pursue. I have never seen such discipline.”* — Captain Nathan Algren (*The Last Samurai*)  
+
+---
 
 ## To do
 
-1. **LeetCode Practice** – 3 problems every day.  
-2. **Personal Project Contributions** – Contribute to personal projects daily.  
-3. **Open Source Contributions** – Contribute to open source projects daily.  
-4. **System Design Practice** – 1 concept per week on Low-Level Design (LLD) / High-Level Design (HLD).  
-5. **Machine Learning Roadmap** – Following the [Machine Learning Engineer Roadmap](https://roadmap.sh/r/ml-engineer-3dqvu).  
-6. **Programming Book Reading** – 1chapter (or more) per day from a programming-related book.  
+1. LeetCode Practice – 3 problems every day.  
+2. Personal Project Contributions – Contribute to personal projects daily.  
+3. Open Source Contributions – Contribute to open source projects daily.  
+4. System Design Practice – 1 concept per week on Low-Level Design (LLD) / High-Level Design (HLD).  
+5. Machine Learning Roadmap  – Following the [Machine Learning Engineer Roadmap](https://roadmap.sh/r/ml-engineer-3dqvu).  
+6. Programming Book Reading – 1chapter (or more) per day from a programming-related book.  
 
 <!-- 
 ---
@@ -20,11 +25,6 @@ This repository documents my journey of continuous learning, shared openly and t
 
 ---
 
-### Inspiration from *The Last Samurai*  
-
-> *“They are an intriguing people. From the moment they wake they devote themselves to the perfection of whatever they pursue. I have never seen such discipline.”* — Captain Nathan Algren (*The Last Samurai*)  
-
----
 
 ## Daily Log  
 
