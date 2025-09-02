@@ -1,0 +1,35 @@
+name: Auto-append daily log row
+
+on:
+  schedule:
+    - cron: "5 13 * * *" # runs daily at ~09:05 America/New_York during EDT
+  workflow_dispatch: # allow manual run
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Append today's row
+        env:
+          DAILY_PERCENT: "0" # change if you want a default non-zero
+        run: |
+          python3 append_daily_row.py
+
+      - name: Commit changes (if any)
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "Auto-add daily row"
+            git push
+          fi
