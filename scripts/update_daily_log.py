@@ -2,101 +2,150 @@
 import json, re, sys, datetime
 from pathlib import Path
 
-# --- Config ---
-TZ = "America/New_York"
-BAR_LEN = 10
-FILLED = "█"
-EMPTY = "░"
 README = Path("README.md")
-INPUT = Path("daily/input.json")
-START = "<!-- DAILY_TABLE_START -->"
-END = "<!-- DAILY_TABLE_END -->"
+INPUT  = Path("daily/input.json")
+CONFIG = Path("daily/config.json")
 
-def today_str():
+START = "<!-- DAILY_TABLE_START -->"
+END   = "<!-- DAILY_TABLE_END -->"
+
+# Defaults (can be overridden by daily/config.json)
+CFG = {
+    "weights": {"project":20, "oss":20, "concept":20, "leetcode":20, "reading":20},
+    "leetcode_target": 3,
+    "timezone": "America/New_York",
+    "bar_len": 10,
+    "filled_char": "█",
+    "empty_char": "░",
+}
+
+def load_json(path, default):
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return default
+
+def today_str(tzname):
     try:
         from zoneinfo import ZoneInfo
-        tz = ZoneInfo(TZ)
+        tz = ZoneInfo(tzname)
         return datetime.datetime.now(tz).date().isoformat()
     except Exception:
-        # Fallback to system local date if zoneinfo unavailable
         return datetime.date.today().isoformat()
 
-def progress_bar(pct: int) -> str:
+def presence_score(value, weight):
+    """Full credit if non-empty and not '—'."""
+    txt = ""
+    if isinstance(value, dict):
+        txt = json.dumps(value, ensure_ascii=False)
+    elif value is None:
+        txt = ""
+    else:
+        txt = str(value).strip()
+    return weight if txt and txt != "—" else 0
+
+def leetcode_score(items, weight, target):
     try:
-        pct = int(pct)
+        count = len(items) if isinstance(items, list) else 0
     except Exception:
-        pct = 0
-    pct = max(0, min(100, pct))
-    filled = round(pct * BAR_LEN / 100)
-    return f"{FILLED*filled}{EMPTY*(BAR_LEN - filled)} {pct}%"
+        count = 0
+    if target <= 0:
+        return weight if count > 0 else 0
+    frac = min(max(count / target, 0), 1)
+    return weight * frac
+
+def reading_score(reading, weight):
+    # Allow richer progress, else presence-based.
+    if isinstance(reading, dict):
+        done = reading.get("chapters_done") or reading.get("pages_done")
+        target = reading.get("chapters_target") or reading.get("pages_target")
+        if isinstance(done, (int, float)) and isinstance(target, (int, float)) and target > 0:
+            frac = min(max(float(done) / float(target), 0), 1)
+            return weight * frac
+        # fallback to presence
+        return presence_score(reading, weight)
+    else:
+        return presence_score(reading, weight)
+
+def progress_bar(pct, bar_len, filled_char, empty_char):
+    pct = max(0, min(100, int(round(pct))))
+    filled = round(pct * bar_len / 100)
+    return f"{filled_char*filled}{empty_char*(bar_len-filled)} {pct}%"
 
 def mk_leetcode(details):
     if not isinstance(details, list) or len(details) == 0:
         return "—"
     lines = []
     for i, item in enumerate(details, 1):
-        title = item.get("title", f"Problem {i}")
-        link = item.get("link", "")
-        if link:
-            lines.append(f"{i}. [{title}]({link})")
+        if isinstance(item, dict):
+            title = item.get("title", f"Problem {i}")
+            link = item.get("link", "")
         else:
-            lines.append(f"{i}. {title}")
-    summary = f"{len(details)} Problems"
-    # <details> works inside GitHub tables
-    return f"<details><summary>{summary}</summary> " + " <br> ".join(lines) + " </details>"
+            title = str(item)
+            link = ""
+        lines.append(f"{i}. [{title}]({link})" if link else f"{i}. {title}")
+    return f"<details><summary>{len(details)} Problems</summary> " + " <br> ".join(lines) + " </details>"
 
-def build_row(d):
-    date = d.get("date", "auto")
+def build_row(data):
+    date = data.get("date", "auto")
     if str(date).lower() == "auto":
-        date = today_str()
-    project = d.get("project", "—") or "—"
-    oss = d.get("oss", "—") or "—"
-    concept = d.get("concept", "—") or "—"
-    reading = d.get("reading", "—") or "—"
-    leetcode = mk_leetcode(d.get("leetcode", []))
-    bar = progress_bar(d.get("percent", 0))
-    return date, f"| {date} | {project} | {oss} | {concept} | {leetcode} | {reading} | {bar} |"
+        date = today_str(CFG["timezone"])
 
-def upsert_row(table_block: str, new_row_date: str, new_row_line: str) -> str:
+    project = data.get("project", "—") or "—"
+    oss = data.get("oss", "—") or "—"
+    concept = data.get("concept", "—") or "—"
+    leetcode = data.get("leetcode", [])
+    reading = data.get("reading", "—")
+
+    w = CFG["weights"]
+    total = 0
+    total += presence_score(project, w["project"])
+    total += presence_score(oss, w["oss"])
+    total += presence_score(concept, w["concept"])
+    total += leetcode_score(leetcode, w["leetcode"], CFG["leetcode_target"])
+    total += reading_score(reading, w["reading"])
+
+    pct = max(0, min(100, round(total)))  # weights sum to 100 by default
+
+    leetcode_md = mk_leetcode(leetcode)
+    if isinstance(reading, dict):
+        reading_title = reading.get("title") or reading.get("link") or "—"
+    else:
+        reading_title = reading
+
+    bar = progress_bar(pct, CFG["bar_len"], CFG["filled_char"], CFG["empty_char"])
+    row = f"| {date} | {project} | {oss} | {concept} | {leetcode_md} | {reading_title} | {bar} |"
+    return date, row
+
+def upsert_row(table_block, date, row_line):
     lines = [ln.rstrip() for ln in table_block.strip("\n").splitlines()]
+    header = "| Day | Project | OSS | Concept | LeetCode | Reading | Daily Avg |"
+    divider = "|-----|---------|-----|---------|----------|---------|-----------|"
 
-    # Ensure header exists
     if not any(re.match(r"^\|\s*Day\s*\|", ln) for ln in lines):
-        lines = [
-            "| Day | Project | OSS | Concept | LeetCode | Reading | Daily Avg |",
-            "|-----|---------|-----|---------|----------|---------|-----------|",
-        ]
-
-    # Replace if today's row exists
-    pat = re.compile(rf"^\|\s*{re.escape(new_row_date)}\s*\|")
+        lines = [header, divider]
+    pat = re.compile(rf"^\|\s*{re.escape(date)}\s*\|")
     for i, ln in enumerate(lines):
         if pat.search(ln):
-            lines[i] = new_row_line
+            lines[i] = row_line
             break
     else:
-        # Insert under divider (index 1) if present
-        if len(lines) >= 2 and re.match(r"^\|[-\s|]+\|$", lines[1]):
-            lines = lines[:2] + [new_row_line] + lines[2:]
+        # insert below header divider
+        if len(lines) >= 2 and lines[1].startswith("|---"):
+            lines = lines[:2] + [row_line] + lines[2:]
         else:
-            # Reconstruct header properly if malformed
-            hdr = "| Day | Project | OSS | Concept | LeetCode | Reading | Daily Avg |"
-            div = "|-----|---------|-----|---------|----------|---------|-----------|"
-            lines = [hdr, div, new_row_line] + [ln for ln in lines if ln.strip() and not ln.startswith(hdr)]
-
+            lines = [header, divider, row_line] + [ln for ln in lines if ln.strip() and not ln.startswith(header)]
     return "\n".join(lines)
 
 def main():
+    global CFG
+    # load config overrides
+    CFG.update(load_json(CONFIG, {}))
+
     if not README.exists():
         sys.exit("README.md not found.")
+    data = load_json(INPUT, {"date":"auto","project":"—","oss":"—","concept":"—","leetcode":[],"reading":"—"})
 
-    # Load input (if missing, create a minimal default)
-    if INPUT.exists():
-        data = json.loads(INPUT.read_text(encoding="utf-8"))
-    else:
-        data = {"date": "auto", "project": "—", "oss": "—", "concept": "—", "leetcode": [], "reading": "—", "percent": 0}
-
-    date, row_line = build_row(data)
-
+    date, row = build_row(data)
     content = README.read_text(encoding="utf-8")
     if START not in content or END not in content:
         sys.exit("Markers not found. Add <!-- DAILY_TABLE_START --> and <!-- DAILY_TABLE_END --> to README.md.")
@@ -104,10 +153,8 @@ def main():
     head, tail = content.split(START, 1)
     table_block, rest = tail.split(END, 1)
 
-    new_table = upsert_row(table_block, date, row_line)
-    new_content = head + START + "\n" + new_table + "\n" + END + rest
-
-    README.write_text(new_content, encoding="utf-8")
+    new_table = upsert_row(table_block, date, row)
+    README.write_text(head + START + "\n" + new_table + "\n" + END + rest, encoding="utf-8")
     print(f"Updated Daily Log for {date}.")
 
 if __name__ == "__main__":
